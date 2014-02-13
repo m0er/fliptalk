@@ -1,0 +1,130 @@
+[2014-02-13 15:10:39,744 ERROR    base       ] Internal Server Error: /demo
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 18, in <module>
+    url(r'^demo/?$', views.demo, name='demo'),
+NameError: name 'views' is not defined
+[2014-02-13 15:10:40,305 ERROR    base       ] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 18, in <module>
+    url(r'^demo/?$', views.demo, name='demo'),
+NameError: name 'views' is not defined
+[2014-02-13 15:11:03,952 ERROR    base       ] Internal Server Error: /demo
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 2, in <module>
+    from fliptalk.views import *
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/views.py", line 11, in <module>
+    from form import UploadFileForm
+ImportError: No module named form
+[2014-02-13 15:11:04,325 ERROR    base       ] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 2, in <module>
+    from fliptalk.views import *
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/views.py", line 11, in <module>
+    from form import UploadFileForm
+ImportError: No module named form
+[2014-02-13 15:11:34,839 ERROR    base       ] Internal Server Error: /demo
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 19, in <module>
+    url(r'^demo/?$', views.demo, name='demo'),
+NameError: name 'views' is not defined
+[2014-02-13 15:11:35,242 ERROR    base       ] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/handlers/base.py", line 90, in get_response
+    response = middleware_method(request)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/middleware/common.py", line 71, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 573, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 453, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 318, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 346, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/core/urlresolvers.py", line 341, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Users/moer/virtualenvs/django16/lib/python2.7/site-packages/django/utils/importlib.py", line 40, in import_module
+    __import__(name)
+  File "/Users/moer/dev/repo.git/fliptalk/fliptalk/urls.py", line 19, in <module>
+    url(r'^demo/?$', views.demo, name='demo'),
+NameError: name 'views' is not defined

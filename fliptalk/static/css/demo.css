@@ -1,0 +1,140 @@
+@CHARSET "UTF-8";
+
+body .container {
+	margin: 0 auto;
+}
+
+.flip-content-icon {
+	cursor: pointer;
+}
+
+.flip-card {
+	transform-style: preserve-3d;
+	transition: 1s;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition: 1s;
+}
+
+.flip-card.flipped {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+}
+
+.flip-card .face {
+	width: 100%;
+	height: 100%;
+	/* 차후 미디어 쿼리로 지정해야 할듯 */
+	perspective: 5000px;
+	-webkit-perspective: 5000px;
+	position: relative;
+	backface-visibility:hidden;
+	-webkit-backface-visibility:hidden; /* Chrome and Safari */
+	-moz-backface-visibility:hidden; /* Firefox */
+	-ms-backface-visibility:hidden; /* Internet Explorer */
+	z-index: 2;
+}
+
+.flip-card .front {
+	z-index: 1;
+}
+
+.flip-card .back {
+	transform: rotateY(-180deg);
+	-webkit-transform: rotateY(-180deg);
+}
+
+.container .content .flip-content-icon {
+	margin-top: -21px;
+}
+
+.container .statistics {
+	border: none;
+	background-color: #EEE;
+}
+
+.container .statistics .title {
+	text-align: center;
+}
+
+.container .statistics .caption+div {
+	display: block !important;
+	margin: 0 auto !important;
+}
+
+.container .comment-lock {
+	border-radius: 6px;
+	background-color: #D2D3D5;
+}
+
+.container .comment-lock h3 {
+	padding: 15px;
+	text-align: center;
+}
+
+.container .content {
+	color: #333;
+}
+
+.container .content .glyphicon:first-child {
+	margin-right: 31px;
+}
+
+.container .content footer {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.container .comments {
+	color: #333;
+}
+
+.container .comments .card footer {
+	clear: both;
+}
+
+.container .comments .well {
+	padding-bottom: 12px;
+}
+
+.container .comments .agree-comment .well {
+	background-color: #84b3db;
+}
+
+.container .comments .disagree-comment .well {
+	background-color: #f4ce99;
+}
+
+.supported .flip-card:not(.supported .flip-card:first-child) {
+	margin-top: -16px;
+}
+
+.container .comments.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.container .comments .content {
+	min-height: 50px;
+}
+
+.container .comment-lock h3 {
+	margin: 0;
+}
+
+.container .comment-context {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.container .comment.supported {
+	margin-top: -21px;
+}
+
+.endpoint, .connector {
+	z-index: 100;
+}
+
+body > footer {
+	text-align: center;
+	margin: 50px 0 30px 0;
+}

@@ -1,39 +1,47 @@
+# -*- coding:utf-8 -*-
 # Django settings for fliptalk project.
+import os.path
 
+LOCAL = True
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('mOer', 'ethdemor@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+if LOCAL:
+    PROJECT_ROOT = '/Users/moer/dev/repo.git/fliptalk/',
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'fliptalk',                   # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': 'fliptalk',
+            'PASSWORD': 'test',
+            'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '',                      # Set to empty string for default.
+        }
     }
-}
+    STATIC_ROOT = '/Users/moer/dev/repo.git/fliptalk/fliptalk/static/',
+    TEMPLATE_DIRS = ('/Users/moer/dev/repo.git/fliptalk/fliptalk/templates/')
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Seoul'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 SITE_ID = 1
 
@@ -61,7 +69,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'fliptalk/static/')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -107,12 +115,6 @@ ROOT_URLCONF = 'fliptalk.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'fliptalk.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,6 +122,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'south',
+    'fliptalk',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -134,12 +139,32 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(message)s'
+        },
+        'verbose': {
+            'format': '[%(asctime)s %(levelname)-8s %(module)-11s] %(message)s'
+        }
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
     'handlers': {
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'midnight',
+            'filename': '/Users/moer/dev/repo.git/fliptalk/log/fliptalk.log',
+            'formatter': 'verbose'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -148,9 +173,12 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console', 'logfile'],
             'level': 'ERROR',
             'propagate': True,
         },
     }
 }
+
+# 기타 세팅
+
