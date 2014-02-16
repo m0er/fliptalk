@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from fliptalk import views
+from fliptalk import views, user
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -17,4 +17,10 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^demo/?$', views.demo, name='demo'),
+    
+    url(r'^post/?$', views.post, name='post'),
+
+    url(r'^register/email/?$', views.register, name='emailRegister'),
+    url(r'^login/email/?$', views.login, name='emailLogin'),
+    url(r'^logout/?$', views.logout, name='logout'),
 )

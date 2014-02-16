@@ -181,4 +181,7 @@ LOGGING = {
 }
 
 # 기타 세팅
-
+AUTH_USER_MODEL = 'fliptalk.User'
+AUTHENTICATION_BACKENDS = (
+    'fliptalk.models.UserBackend',
+)

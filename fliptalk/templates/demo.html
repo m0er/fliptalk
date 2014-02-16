@@ -8,17 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/demo.css">
 	</head>
 	<body>
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container">
-				<header class="navbar-header">
-					<a class="navbar-brand" href="/demo">FlipTalk</a>
-				</header>
-				
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/demo">Demo</a></li>
-				</ul>
-			</div>
-		</nav>
+		{% include 'common/gnb.html' with user=user %}
 		
 		<div class="container">
 			<!-- 본문 영역 -->

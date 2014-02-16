@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fliptalk Demo Page</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+	</head>
+	<body id="login">
+		{% include 'common/gnb.html' with user=user %}
+		
+		<div class="container">
+			<!-- 본문 영역 -->
+			{% if not user.is_authenticated %}
+			<form role="form" action="{% url 'emailLogin' %}" method="post">
+				<div class="form-group">
+					<label for="email">Email address</label>
+					<input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+				</div>
+				<button type="submit" class="btn btn-default">로그인</button>
+			</form>
+			{% endif %}
+		</div>
+		
+		<footer class="well well-sm">
+			© 2013 mOer
+		</footer>
+		<script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"/>"></script>
+		<script type="text/javascript" src="/static/js/holder.js"/>"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/js/demo.js"/>"></script>
+	</body>
+</html>
