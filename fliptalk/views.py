@@ -2,11 +2,14 @@
 
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-import requests, simplejson, fliptalk.user as userService
+import requests, simplejson, fliptalk.services.user as userService
 from django.http.response import Http404
 from django.template.context import RequestContext
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+
+def index(request):
+	return render_to_response('demo.html', context_instance=RequestContext(request))
 
 def demo(request):
     return render_to_response('demo.html', context_instance=RequestContext(request))
