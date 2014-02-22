@@ -51,7 +51,8 @@ class User(AbstractBaseUser):
 		dict = {}
 		dict['email'] = self.email
 		dict['nickname'] = self.nickname
-		dict['desc'] = self.desc
+		if self.desc:
+			dict['desc'] = self.desc
 		dict['isActive'] = self.isActive
 		dict['isAdmin'] = self.isAdmin
 
@@ -86,9 +87,29 @@ class Post(models.Model):
 	title = models.CharField(blank=False, max_length=1000)
 	summary = models.CharField(blank=True, max_length=1000)
 	content = models.TextField(blank=True)
-	actionLabel = models.CharField(blank=True, max_length=1000)
+	agreeLabel = models.CharField(blank=True, max_length=100)
+	disagreeLabel = models.CharField(blank=True, max_length=100)
 	writer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
 	status = models.SmallIntegerField(default=0)
 	createTime = models.DateTimeField(auto_now_add=True)
 	updateTime = models.DateTimeField(auto_now=True)
 	references = models.ForeignKey(Reference, related_name='+')
+
+	def getDict(self):
+		dict = {}
+		dict['title'] = self.title
+		if self.summary:
+			dict['summary'] = self.summary
+		if self.content:
+			dict['content'] = self.content
+		if self.agreeLabel and self.disagreeLabel:
+			dict['agreeLabel'] = self.agreeLabel
+			dict['disagreeLabel'] = self.disagreeLabel
+		dict['writer'] = self.writer.getDict()
+		dict['status'] = self.status
+		dict['createTime'] = self.createTime
+		dict['updateTime'] = self.updateTime
+		if self.references:
+			dict['references'] = self.references
+
+		return dict
