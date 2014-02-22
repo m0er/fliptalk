@@ -58,6 +58,15 @@ class User(AbstractBaseUser):
 
 		return dict
 
+	def getDict(self):
+		dict = {}
+		dict['email'] = self.email
+		dict['nickname'] = self.nickname
+		if self.desc:
+			dict['desc'] = self.desc
+
+		return dict
+
 class UserBackend(object):
 	def authenticate(self, username=None, password=None):
 		# email login
@@ -93,7 +102,7 @@ class Post(models.Model):
 	status = models.SmallIntegerField(default=0)
 	createTime = models.DateTimeField(auto_now_add=True)
 	updateTime = models.DateTimeField(auto_now=True)
-	references = models.ForeignKey(Reference, related_name='+')
+	references = models.ManyToManyField(Reference, related_name='+')
 
 	def getDict(self):
 		dict = {}
@@ -110,6 +119,6 @@ class Post(models.Model):
 		dict['createTime'] = self.createTime
 		dict['updateTime'] = self.updateTime
 		if self.references:
-			dict['references'] = self.references
+			dict['references'] = self.references.values()
 
 		return dict
