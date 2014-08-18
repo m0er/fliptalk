@@ -7,3 +7,5 @@ FLIP-TALK
 * 플립토크 아이디어(2010년에 작성한 포스트): http://wp.me/p12fxZ-2l
 
 Since 2003
+
+:-)
