@@ -39,29 +39,26 @@
 	        						endpoint:"Blank",
 	        						anchors:["LeftMiddle", "RightMiddle"]
 	                			};
-            				
+
             				jsPlumb.connect({
             					source: 'context0agree0',
-            					target: 'context0disagree0',
-            					container: $('#flipTalkComment .comments').first()
+            					target: 'context0disagree0'
             				}, stateMachineConnectorToRight);
-            				
+
             				offsetY = offsetY + 10;
             				stateMachineConnectorToRight.anchors[0][5] = offsetY;
-            				
+
             				jsPlumb.connect({
             					source: 'context0agree0',
-            					target: 'context0disagree1',
-            					container: $('#flipTalkComment .comments').first()
+            					target: 'context0disagree1'
             				}, stateMachineConnectorToRight);
-            				
+
             				jsPlumb.connect({
             					source: 'context0disagree0',
-            					target: 'context0agree1',
-            					container: $('#flipTalkComment .comments').first()
+            					target: 'context0agree1'
             				}, stateMachineConnectorToLeft);
             			});
-            		}, 800); // 1000 : 800
+            		}, 320); // 1000 : 800
             	} else {
             		setTimeout(function() {
             			$front.toggleClass('hide');

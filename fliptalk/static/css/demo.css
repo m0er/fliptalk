@@ -92,6 +92,22 @@ body .container {
 	clear: both;
 }
 
+.container .comments .agree-comment {
+    float: left;
+}
+
+.container .comments .agree-comment .comment {
+    width: 454px;
+}
+
+.container .comments .disagree-comment {
+    float: right;
+}
+
+.container .comments .disagree-comment .comment {
+    width: 454px;
+}
+
 .container .comments .well {
 	padding-bottom: 12px;
 }

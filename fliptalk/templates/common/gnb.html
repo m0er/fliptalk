@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default" role="navigation">
-	<div class="container">
-		<header class="navbar-header">
-			<a class="navbar-brand" href="/demo">FlipTalk</a>
-		</header>
-		
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/demo">Demo</a></li>
-			{% if not user.is_authenticated %}
-			<li><a href="{% url 'emailLogin' %}">Login</a></li>
-			<li><a href="{% url 'emailRegister' %}">Register</a></li>
-			{% else %}
-			<li><a href="{% url 'logout' %}">Logout</a></li>
-			{% endif %}
-		</ul>
-	</div>
+    <div class="container">
+        <header class="navbar-header">
+            <a class="navbar-brand" href="/demo">FlipTalk</a>
+        </header>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/demo">Demo</a></li>
+            {% if not user.is_authenticated %}
+                <li><a href="{% url 'emailLogin' %}">Login</a></li>
+                <li><a href="{% url 'emailRegister' %}">Register</a></li>
+            {% else %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
