@@ -8,5 +8,5 @@ LOG_WARN = 2
 LOG_ERROR = 3
 LOG_FATAL = 4
 
-################# Photo Type ##########################
+# ################ Photo Type ##########################
 PHOTO_TYPE_NONE = 0

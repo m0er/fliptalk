@@ -6,8 +6,10 @@ from django.db import models
 from django.db.models import Count
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+
 class Photo(models.Model):
-	uri = models.URLField(blank=False)
+    uri = models.URLField(blank=False)
+
 
 # 유저 계정정보
 class UserManager(BaseUserManager):
@@ -34,91 +36,95 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class User(AbstractBaseUser):
-	email = models.EmailField(max_length=255, unique=True, db_index=True)
-	nickname = models.CharField(max_length=16, unique=True, db_index=True)
-	desc = models.CharField(max_length=1000, blank=True)
-	dateJoined = models.DateTimeField(auto_now_add=True)
-	isActive = models.BooleanField(default=True)
-	isAdmin = models.BooleanField(default=False)
+    email = models.EmailField(max_length=255, unique=True, db_index=True)
+    nickname = models.CharField(max_length=16, unique=True, db_index=True)
+    desc = models.CharField(max_length=1000, blank=True)
+    dateJoined = models.DateTimeField(auto_now_add=True)
+    isActive = models.BooleanField(default=True)
+    isAdmin = models.BooleanField(default=False)
 
-	objects = UserManager()
+    objects = UserManager()
 
-	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['nickname']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nickname']
 
-	def getAccountDict(self):
-		dict = {}
-		dict['email'] = self.email
-		dict['nickname'] = self.nickname
-		if self.desc:
-			dict['desc'] = self.desc
-		dict['isActive'] = self.isActive
-		dict['isAdmin'] = self.isAdmin
+    def getAccountDict(self):
+        dict = {}
+        dict['email'] = self.email
+        dict['nickname'] = self.nickname
+        if self.desc:
+            dict['desc'] = self.desc
+        dict['isActive'] = self.isActive
+        dict['isAdmin'] = self.isAdmin
 
-		return dict
+        return dict
 
-	def getDict(self):
-		dict = {}
-		dict['email'] = self.email
-		dict['nickname'] = self.nickname
-		if self.desc:
-			dict['desc'] = self.desc
+    def getDict(self):
+        dict = {}
+        dict['email'] = self.email
+        dict['nickname'] = self.nickname
+        if self.desc:
+            dict['desc'] = self.desc
 
-		return dict
+        return dict
+
 
 class UserBackend(object):
-	def authenticate(self, username=None, password=None):
-		# email login
-		if username != None and password != None:
-			try:
-				user = User.objects.get(email=username)
-				if user.check_password(password):
-					return user
-				else:
-					return None
-			except User.DoesNotExist:
-				return None
+    def authenticate(self, username=None, password=None):
+        # email login
+        if username != None and password != None:
+            try:
+                user = User.objects.get(email=username)
+                if user.check_password(password):
+                    return user
+                else:
+                    return None
+            except User.DoesNotExist:
+                return None
 
-		return None
+        return None
 
-	def get_user(self, user_id):
-		try:
-			return User.objects.get(pk=user_id)
-		except User.DoesNotExist:
-			return None
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None
+
 
 class Reference(models.Model):
-	uri = models.URLField(blank=False)
-	count = models.IntegerField(default=0)
+    uri = models.URLField(blank=False)
+    count = models.IntegerField(default=0)
+
 
 class Post(models.Model):
-	title = models.CharField(blank=False, max_length=1000)
-	summary = models.CharField(blank=True, max_length=1000)
-	content = models.TextField(blank=True)
-	agreeLabel = models.CharField(blank=True, max_length=100)
-	disagreeLabel = models.CharField(blank=True, max_length=100)
-	writer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
-	status = models.SmallIntegerField(default=0)
-	createTime = models.DateTimeField(auto_now_add=True)
-	updateTime = models.DateTimeField(auto_now=True)
-	references = models.ManyToManyField(Reference, related_name='+')
+    title = models.CharField(blank=False, max_length=1000)
+    summary = models.CharField(blank=True, max_length=1000)
+    content = models.TextField(blank=True)
+    agreeLabel = models.CharField(blank=True, max_length=100)
+    disagreeLabel = models.CharField(blank=True, max_length=100)
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    status = models.SmallIntegerField(default=0)
+    createTime = models.DateTimeField(auto_now_add=True)
+    updateTime = models.DateTimeField(auto_now=True)
+    references = models.ManyToManyField(Reference, related_name='+')
 
-	def getDict(self):
-		dict = {}
-		dict['title'] = self.title
-		if self.summary:
-			dict['summary'] = self.summary
-		if self.content:
-			dict['content'] = self.content
-		if self.agreeLabel and self.disagreeLabel:
-			dict['agreeLabel'] = self.agreeLabel
-			dict['disagreeLabel'] = self.disagreeLabel
-		dict['writer'] = self.writer.getDict()
-		dict['status'] = self.status
-		dict['createTime'] = self.createTime
-		dict['updateTime'] = self.updateTime
-		if self.references:
-			dict['references'] = self.references.values()
+    def getDict(self):
+        dict = {}
+        dict['title'] = self.title
+        if self.summary:
+            dict['summary'] = self.summary
+        if self.content:
+            dict['content'] = self.content
+        if self.agreeLabel and self.disagreeLabel:
+            dict['agreeLabel'] = self.agreeLabel
+            dict['disagreeLabel'] = self.disagreeLabel
+        dict['writer'] = self.writer.getDict()
+        dict['status'] = self.status
+        dict['createTime'] = self.createTime
+        dict['updateTime'] = self.updateTime
+        if self.references:
+            dict['references'] = self.references.values()
 
-		return dict
+        return dict

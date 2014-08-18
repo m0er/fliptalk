@@ -6,10 +6,11 @@ from fliptalk.core import *
 from fliptalk.const import *
 from fliptalk.models import *
 
+
 @csrf_exempt
-def registerByEmail(request, email, password, nickname):
-    #check param exist
-    if nickname == None or password == None or email == None:
+def register_by_email(request, email, password, nickname):
+    # check param exist
+    if not nickname or not password or not email:
         return get_json_failed_response(Error.INVALID_PARAMETER)
 
     user = User.objects.create_user(email, nickname, password)
@@ -20,24 +21,26 @@ def registerByEmail(request, email, password, nickname):
 
     return get_json_success_response(info=user.getAccountDict(), infoKey='account')
 
+
 def logoutUser(request):
     logout(request)
 
     return get_json_success_response()
 
-def loginByEmail(request, email, password):
-	if email == None or password == None:
-		return get_json_failed_response(Error.INVALID_PARAMETER)
 
-	user = authenticate(username=email, password=password)
-	
-	if user == None:
-		return get_json_failed_response(Error.INVALID_EMAIL_OR_PASSWORD)
+def login_by_email(request, email, password):
+    if not email or not password:
+        return get_json_failed_response(Error.INVALID_PARAMETER)
 
-	# 탈퇴한 유저
-	if not user.is_active:
-		return get_json_failed_response(Error.INVALID_EMAIL_OR_PASSWORD)
+    user = authenticate(username=email, password=password)
 
-	login(request, user)
+    if not user:
+        return get_json_failed_response(Error.INVALID_EMAIL_OR_PASSWORD)
 
-	return get_json_success_response(info=user.getAccountDict(), infoKey='account')
+    # 탈퇴한 유저
+    if not user.is_active:
+        return get_json_failed_response(Error.INVALID_EMAIL_OR_PASSWORD)
+
+    login(request, user)
+
+    return get_json_success_response(info=user.getAccountDict(), infoKey='account')

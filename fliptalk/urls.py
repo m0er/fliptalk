@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from fliptalk import views, user
+from fliptalk import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
