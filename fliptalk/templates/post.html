@@ -13,13 +13,16 @@
 		<div class="container">
 			<!-- 본문 영역 -->
 			<form role="form" action="{% url 'post' %}" method="post">
-				
+				<!--
+				    title
+				    summary
+                    content
+                    references
+				 -->
 			</form>
 		</div>
 		
-		<footer class="well well-sm">
-			© 2013 mOer
-		</footer>
+		{% include 'common/footer.html' %}
 		<script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
 		<script type="text/javascript" src="/static/js/holder.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

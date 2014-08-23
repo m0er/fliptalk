@@ -10,6 +10,7 @@
                 <li><a href="{% url 'email_login' %}">Login</a></li>
                 <li><a href="{% url 'email_register' %}">Register</a></li>
             {% else %}
+                <li><a href="{% url 'post' %}">Write</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             {% endif %}
         </ul>
