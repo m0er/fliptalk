@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     
     url(r'^post/?$', views.post, name='post'),
 
-    url(r'^register/email/?$', views.register, name='emailRegister'),
-    url(r'^login/email/?$', views.login, name='emailLogin'),
+    url(r'^register/email/?$', views.register, name='email_register'),
+    url(r'^login/email/?$', views.login, name='email_login'),
     url(r'^logout/?$', views.logout, name='logout'),
 )

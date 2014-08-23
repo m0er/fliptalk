@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import requests
+from fliptalk.const import *
 from django.conf import settings
 from django.db import models
 from django.db.models import Count
@@ -19,7 +19,7 @@ class UserManager(BaseUserManager):
 
         user = self.model(email=UserManager.normalize_email(email), nickname=nickname)
 
-        if password == None:
+        if not password:
             user.set_unusable_password()
         else:
             user.set_password(password)
@@ -36,7 +36,6 @@ class UserManager(BaseUserManager):
 
         return user
 
-
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     nickname = models.CharField(max_length=16, unique=True, db_index=True)
@@ -50,31 +49,31 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 
-    def getAccountDict(self):
-        dict = {}
-        dict['email'] = self.email
-        dict['nickname'] = self.nickname
+    def get_account_dict(self):
+        account_dict = account_dict()
+        account_dict['email'] = self.email
+        account_dict['nickname'] = self.nickname
         if self.desc:
-            dict['desc'] = self.desc
-        dict['isActive'] = self.isActive
-        dict['isAdmin'] = self.isAdmin
+            account_dict['desc'] = self.desc
+        account_dict['isActive'] = self.isActive
+        account_dict['isAdmin'] = self.isAdmin
 
-        return dict
+        return account_dict
 
-    def getDict(self):
-        dict = {}
-        dict['email'] = self.email
-        dict['nickname'] = self.nickname
+    def get_dict(self):
+        user_dict = dict()
+        user_dict['email'] = self.email
+        user_dict['nickname'] = self.nickname
         if self.desc:
-            dict['desc'] = self.desc
+            user_dict['desc'] = self.desc
 
-        return dict
+        return user_dict
 
 
 class UserBackend(object):
     def authenticate(self, username=None, password=None):
         # email login
-        if username != None and password != None:
+        if username and password:
             try:
                 user = User.objects.get(email=username)
                 if user.check_password(password):
@@ -92,39 +91,37 @@ class UserBackend(object):
         except User.DoesNotExist:
             return None
 
-
 class Reference(models.Model):
     uri = models.URLField(blank=False)
     count = models.IntegerField(default=0)
-
 
 class Post(models.Model):
     title = models.CharField(blank=False, max_length=1000)
     summary = models.CharField(blank=True, max_length=1000)
     content = models.TextField(blank=True)
-    agreeLabel = models.CharField(blank=True, max_length=100)
-    disagreeLabel = models.CharField(blank=True, max_length=100)
+    agreeLabel = models.CharField(blank=True, max_length=100, default=DEFAULT_AGREE_LABEL)
+    disagreeLabel = models.CharField(blank=True, max_length=100, default=DEFAULT_DISAGREE_LABEL)
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     status = models.SmallIntegerField(default=0)
     createTime = models.DateTimeField(auto_now_add=True)
     updateTime = models.DateTimeField(auto_now=True)
     references = models.ManyToManyField(Reference, related_name='+')
 
-    def getDict(self):
-        dict = {}
-        dict['title'] = self.title
+    def get_dict(self):
+        post_dict = dict()
+        post_dict['title'] = self.title
         if self.summary:
-            dict['summary'] = self.summary
+            post_dict['summary'] = self.summary
         if self.content:
-            dict['content'] = self.content
+            post_dict['content'] = self.content
         if self.agreeLabel and self.disagreeLabel:
-            dict['agreeLabel'] = self.agreeLabel
-            dict['disagreeLabel'] = self.disagreeLabel
-        dict['writer'] = self.writer.getDict()
-        dict['status'] = self.status
-        dict['createTime'] = self.createTime
-        dict['updateTime'] = self.updateTime
+            post_dict['agreeLabel'] = self.agreeLabel
+            post_dict['disagreeLabel'] = self.disagreeLabel
+        post_dict['writer'] = self.writer.get_dict()
+        post_dict['status'] = self.status
+        post_dict['createTime'] = self.createTime
+        post_dict['updateTime'] = self.updateTime
         if self.references:
-            dict['references'] = self.references.values()
+            post_dict['references'] = self.references.values()
 
-        return dict
+        return post_dict

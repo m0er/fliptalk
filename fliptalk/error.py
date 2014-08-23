@@ -54,7 +54,7 @@ Error = enum(
 )
 
 
-def get_error_message_ko(errorCode):
+def get_error_message(errorCode):
     if errorCode == Error.SUCCESS:
         return ''
     elif errorCode == Error.INVALID_PARAMETER:

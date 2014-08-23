@@ -83,77 +83,6 @@ def split_id_string_to_dict(idString, pattern=','):
     return idDict
 
 
-def get_device_and_version(request):
-    userAgent = request.META['HTTP_USER_AGENT']
-    array = split_string(userAgent, '/')
-
-    deviceName = 'unknown'
-    version = '0'
-
-    if len(array) < 2:
-        return 'unknown', '0'
-
-    if array[0] == 'Zibit_iOS':
-        deviceName = 'ios'
-    elif array[0] == 'Zibit_Android':
-        deviceName = 'android'
-
-    version = array[1]
-    return deviceName, version
-
-
-def convert_ios_version_to_int(versionStr):
-    array = split_string(versionStr, '.')
-    if len(array) < 3:
-        return 0
-    versionInt = int(array[0]) * 100000000 + int(array[1]) * 10000 + int(array[2])
-    return versionInt
-
-
-def is_gte_version(deviceName, deviceVersion, minIosVer, minAndVer):
-    if deviceName == 'ios' and convert_ios_version_to_int(deviceVersion) >= convert_ios_version_to_int(minIosVer):
-        return True
-    elif deviceName == 'android' and int(deviceVersion) >= int(minAndVer):
-        return True
-
-    return False
-
-
-def is_gt_version(deviceName, deviceVersion, minIosVer, minAndVer):
-    if deviceName == 'ios' and convert_ios_version_to_int(deviceVersion) > convert_ios_version_to_int(minIosVer):
-        return True
-    elif deviceName == 'android' and int(deviceVersion) > int(minAndVer):
-        return True
-
-    return False
-
-
-def is_lte_version(deviceName, deviceVersion, minIosVer, minAndVer):
-    if deviceName == 'ios' and convert_ios_version_to_int(deviceVersion) <= convert_ios_version_to_int(minIosVer):
-        return True
-    elif deviceName == 'android' and int(deviceVersion) <= int(minAndVer):
-        return True
-
-    return False
-
-
-def is_lt_version(deviceName, deviceVersion, minIosVer, minAndVer):
-    if deviceName == 'ios' and convert_ios_version_to_int(deviceVersion) < convert_ios_version_to_int(minIosVer):
-        return True
-    elif deviceName == 'android' and int(deviceVersion) < int(minAndVer):
-        return True
-
-    return False
-
-
-def make_zibit_uri(scheme, targetId=None):
-    uri = 'zibit://%s' % (scheme,)
-    if targetId != None:
-        uri = '%s/%d' % (uri, targetId,)
-
-    return uri
-
-
 def json_str_to_obj(jsonStr):
     obj = json.loads(jsonStr)
     return obj
@@ -244,46 +173,6 @@ def get_info_list_from_queryset(queryset):
     return retList
 
 
-def get_item_list_from_itemset_queryset(queryset, includePoint=False):
-    from datetime import timedelta
-
-    retList = []
-    for row in queryset:
-        object = row.item.get_info_dict()
-        object['coverPhotoType'] = row.photoType
-        if includePoint:
-            object['_point_'] = row.point
-
-        # reissue된 아이템
-        if row.issueLikeCount > 0:
-            currentTime = timezone.now()
-            if currentTime < row.issueDate + timedelta(seconds=84200):
-                if object['coverPhotoIconType'] != COVER_ICON_TYPE_ZIBITPICK:
-                    object['coverPhotoIconType'] = COVER_ICON_TYPE_OLD
-
-        retList.append(object)
-
-    return retList
-
-
-def get_item_photo_info_list_from_item_queryset(queryset):
-    retList = []
-    for row in queryset:
-        object = row.get_item_photo_info_dict()
-        retList.append(object)
-
-    return retList
-
-
-def get_item_photo_info_list_from_item_dict_list(list):
-    retList = []
-    for row in list:
-        photoDict = {'itemId': row['id'], 'itemName': row['name'], 'photo': row['mainPhoto']}
-        retList.append(photoDict)
-
-    return retList
-
-
 def get_truncated_str(str, truncateLen, truncatePostfix='...'):
     if str == None:
         return ''
@@ -320,47 +209,26 @@ def get_unicode_escape_truncated_str(str, truncateByte, truncatePostfix='...'):
                         encodedStr[:(truncateByte - len(encodedPostfix))]) + truncatePostfix
     return partialStr.decode('unicode_escape')
 
-
-def get_random_default_user_cover_photo():
-    coverPhotoCount = len(settings.DEFAULT_USER_COVER_PHOTO_IDS)
-    if coverPhotoCount == 0:
-        return None
-
-    randomIndex = random.randrange(0, coverPhotoCount)
-    photoId = settings.DEFAULT_USER_COVER_PHOTO_IDS[randomIndex]
-
-    from zibit.models import Photo
-
-    try:
-        photo = Photo.objects.get(id=photoId)
-        return photo
-    except Photo.DoesNotExist:
-        pass
-
-    return None
-
-
-def Log(level, message):
+def log(level, message):
     print message.encode('utf-8')
     return
 
-
-def LogDebug(message):
-    Log(LOG_DEBUG, message)
-
-
-def LogInfo(message):
-    Log(LOG_INFO, message)
+def log_d(message):
+    log(LOG_DEBUG, message)
 
 
-def LogWarn(message):
-    Log(LOG_WARN, message)
+def log_i(message):
+    log(LOG_INFO, message)
 
 
-def LogError(message):
-    Log(LOG_ERROR, message)
+def log_w(message):
+    log(LOG_WARN, message)
 
 
-def LogFatal(message):
-    Log(LOG_FATAL, message)
+def log_e(message):
+    log(LOG_ERROR, message)
+
+
+def log_f(message):
+    log(LOG_FATAL, message)
 
