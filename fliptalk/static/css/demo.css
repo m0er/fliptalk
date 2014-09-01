@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+/* 푸터 */
+footer.well {
+    margin-bottom: 0;
+}
+
 body .container {
 	margin: 0 auto;
 }
