@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^demo/?$', views.demo, name='demo'),
     
     url(r'^post/?$', views.post, name='post'),
+    url(r'^list/?$', views.list, name='list'),
 
     url(r'^register/email/?$', views.register, name='email_register'),
     url(r'^login/email/?$', views.login, name='email_login'),

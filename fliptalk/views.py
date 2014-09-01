@@ -14,6 +14,8 @@ def index(request):
 def demo(request):
     return render_to_response('demo.html', context_instance=RequestContext(request))
 
+def list(request):
+    pass
 
 @csrf_exempt
 def post(request):
