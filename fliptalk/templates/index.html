@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fliptalk Demo Page</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+</head>
+<body class="index">
+{% include 'common/gnb.html' with user=user %}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>FLIP-TALK</h1>
+        <p>본격 끝장 토론을 위한 새로운 서비스!<br/>돌려라 플립! 플립토크!</p>
+        <p><a href="{% url 'list' %}" class="btn btn-success btn-lg">둘러보기</a></p>
+    </div>
+</div>
+
+{% include 'common/footer.html' %}
+<script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+<script type = "text/javascript" src = "/static/js/holder.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html >

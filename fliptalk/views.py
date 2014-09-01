@@ -8,7 +8,7 @@ import fliptalk.user as user_service
 
 
 def index(request):
-    return render_to_response('demo.html', context_instance=RequestContext(request))
+    return render_to_response('index.html', context_instance=RequestContext(request))
 
 
 def demo(request):
