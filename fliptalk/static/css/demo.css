@@ -5,6 +5,7 @@ footer.well {
     margin-bottom: 0;
 }
 
+/* Demo 페이지 */
 body .container {
 	margin: 0 auto;
 }
@@ -165,4 +166,7 @@ body > footer {
     text-align: center;
 }
 
+/* Post 페이지 */
+.post form textarea {
+    resize: none;
 }

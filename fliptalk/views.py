@@ -3,7 +3,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-
+from fliptalk.models import *
 import fliptalk.user as user_service
 
 
@@ -23,8 +23,27 @@ def post(request):
     if method == 'GET':
         return render_to_response('post.html', context_instance=RequestContext(request))
     elif method == 'POST':
-        pass
+        if not request.user.is_authenticated():
+            redirect('/login/email')
 
+        title = request.POST.get('title')
+        summary = request.POST.get('summary')
+        content = request.POST.get('content')
+        reference = request.POST.get('reference')
+        user = request.user
+
+        goc_reference, created = Reference.objects.get_or_create(uri=reference)
+        if goc_reference:
+            goc_reference.count += 1
+            goc_reference.save()
+
+        new_post = Post(title=title, summary=summary, content=content, writer=user)
+        new_post.save()
+
+        new_post.references.add(goc_reference)
+        new_post.save()
+
+        return redirect('/')
 
 @csrf_exempt
 def register(request):
