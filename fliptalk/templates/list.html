@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fliptalk Demo Page</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+</head>
+<body class="list">
+{% include 'common/gnb.html' with user=user %}
+
+<div class="container">
+    {% for post in posts %}
+    <article class="panel panel-default">
+        <div class="panel-body">
+            <h3 class="panel-title">{{ post.title }}</h3>
+            {{ post.summary }}
+        </div>
+    </article>
+    {%  endfor %}
+</div>
+
+{% include 'common/footer.html' %}
+<script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+<script type = "text/javascript" src = "/static/js/holder.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html >

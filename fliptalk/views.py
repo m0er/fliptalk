@@ -15,7 +15,10 @@ def demo(request):
     return render_to_response('demo.html', context_instance=RequestContext(request))
 
 def list(request):
-    pass
+    posts = Post.objects.all()
+    return render_to_response('list.html', {
+        'posts': posts
+    }, context_instance=RequestContext(request))
 
 @csrf_exempt
 def post(request):

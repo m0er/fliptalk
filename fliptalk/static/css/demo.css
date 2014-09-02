@@ -161,12 +161,23 @@ body > footer {
 	margin: 50px 0 30px 0;
 }
 
-/* Index 페이지 */
+/* 인덱스 페이지 */
 .index .jumbotron {
     text-align: center;
 }
 
-/* Post 페이지 */
+/* 포스팅 페이지 */
 .post form textarea {
     resize: none;
+}
+
+/* 리스트 페이지 */
+.list .panel .panel-body {
+    color: #828282;
+}
+
+.list .panel .panel-title {
+    color: black;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
