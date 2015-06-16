@@ -172,7 +172,11 @@ body > footer {
 }
 
 /* 리스트 페이지 */
-.list .panel .panel-body {
+.list .panel {
+    cursor: pointer;
+}
+
+.list .panel .panel-body .content {
     color: #828282;
 }
 

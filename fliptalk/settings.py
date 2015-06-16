@@ -26,8 +26,7 @@ if LOCAL:
         }
     }
     STATIC_ROOT = '/Users/moer/dev/repo.git/fliptalk/fliptalk/static/',
-    TEMPLATE_DIRS = ('/Users/moer/dev/repo.git/fliptalk/fliptalk/templates/')
-
+    TEMPLATE_DIRS = ['/Users/moer/dev/repo.git/fliptalk/fliptalk/templates/']
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -123,7 +122,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'south',
     'fliptalk',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',

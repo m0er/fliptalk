@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from fliptalk.models import *
@@ -20,11 +20,17 @@ def list(request):
         'posts': posts
     }, context_instance=RequestContext(request))
 
+def get_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render_to_response('post.html', {
+        'post': post
+    }, context_instance=RequestContext(request))
+
 @csrf_exempt
-def post(request):
+def post_form(request):
     method = request.method
     if method == 'GET':
-        return render_to_response('post.html', context_instance=RequestContext(request))
+        return render_to_response('post_form.html', context_instance=RequestContext(request))
     elif method == 'POST':
         if not request.user.is_authenticated():
             redirect('/login/email')

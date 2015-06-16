@@ -12,10 +12,10 @@
 
 <div class="container">
     {% for post in posts %}
-    <article class="panel panel-default">
+    <article class="panel panel-default" data-href="{% url 'get_post' post.id %}">
         <div class="panel-body">
             <h3 class="panel-title">{{ post.title }}</h3>
-            {{ post.summary }}
+            <a class="content" href="{% url 'get_post' post.id %}">{{ post.summary }}</a>
         </div>
     </article>
     {%  endfor %}
@@ -25,5 +25,18 @@
 <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
 <script type = "text/javascript" src = "/static/js/holder.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        function goPage() {
+            console.log(this);
+            var url = $(this).data('href');
+            window.location.href = url;
+        }
+
+        console.log('test');
+
+        $('[data-href]').on('click', goPage);
+    });
+</script>
 </body>
 </html >

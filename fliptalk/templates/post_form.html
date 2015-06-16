@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fliptalk Post Page</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+	</head>
+	<body class="post">
+		{% include 'common/gnb.html' with user=user %}
+		
+		<div class="container">
+            <div class="page-header">
+                <h1>오늘 토론해보고 싶은 주제가 있나요?</h1>
+            </div>
+			<!-- 본문 영역 -->
+			<form role="form" action="{% url 'post_form' %}" method="post">
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control input-lg" placeholder="토론 할 주제를 입력하세요" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="title">요약</label>
+                    <input type="text" class="form-control input-lg" placeholder="주제에 대해 간략히 요약해 보세요" name="summary">
+                </div>
+                <div class="form-group">
+                    <label for="title">내용</label>
+                    <textarea class="form-control" rows="3" placeholder="내용을 입력하세요" name="content"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="title">참고링크</label>
+                    <input type="url" class="form-control input-lg" placeholder="내용을 보충 할 링크를 입력해 보세요" name="reference">
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg" value="새로운 토론 작성">
+			</form>
+		</div>
+		
+		{% include 'common/footer.html' %}
+		<script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="/static/js/holder.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</body>
+</html>
